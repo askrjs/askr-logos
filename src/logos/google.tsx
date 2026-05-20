@@ -1,0 +1,75 @@
+import { createLogo } from "../create-logo";
+
+export const GoogleLogo = createLogo("GoogleLogo", [
+  [
+    "circle",
+    {
+      cx: "12",
+      cy: "12",
+      r: "7.2",
+      fill: "none",
+      stroke: "#4285f4",
+      "stroke-width": "3.2",
+      "stroke-dasharray": "11 34",
+      "stroke-dashoffset": "0",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+    },
+  ],
+  [
+    "circle",
+    {
+      cx: "12",
+      cy: "12",
+      r: "7.2",
+      fill: "none",
+      stroke: "#ea4335",
+      "stroke-width": "3.2",
+      "stroke-dasharray": "11 34",
+      "stroke-dashoffset": "11",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+    },
+  ],
+  [
+    "circle",
+    {
+      cx: "12",
+      cy: "12",
+      r: "7.2",
+      fill: "none",
+      stroke: "#fbbc05",
+      "stroke-width": "3.2",
+      "stroke-dasharray": "11 34",
+      "stroke-dashoffset": "22",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+    },
+  ],
+  [
+    "circle",
+    {
+      cx: "12",
+      cy: "12",
+      r: "7.2",
+      fill: "none",
+      stroke: "#34a853",
+      "stroke-width": "3.2",
+      "stroke-dasharray": "11 34",
+      "stroke-dashoffset": "33",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+    },
+  ],
+  [
+    "path",
+    {
+      d: "M12 12h5.2",
+      fill: "none",
+      stroke: "#4285f4",
+      "stroke-width": "3.2",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+    },
+  ],
+]);
