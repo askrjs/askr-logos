@@ -1,8 +1,17 @@
 # @askrjs/logos
 
-Manual Askr components for a small set of brand logos.
+Thin Askr wrappers for a small set of brand logos.
 
-## Included logos
+`@askrjs/logos` keeps brand marks aligned with the shared Askr icon contract.
+Use it when you need a known logo rather than a general icon registry.
+
+## Install
+
+```bash
+npm install @askrjs/logos @askrjs/askr
+```
+
+## Included Logos
 
 - GitHub
 - Facebook
@@ -10,7 +19,7 @@ Manual Askr components for a small set of brand logos.
 - Apple
 - Google
 
-## Usage
+## Use
 
 ```tsx
 import { FacebookLogo, GitHubLogo, GoogleLogo } from "@askrjs/logos";
@@ -26,6 +35,10 @@ export function Header() {
 }
 ```
 
-Each logo is a thin wrapper around `@askrjs/askr`'s icon contract, so it keeps the same sizing and accessibility behavior as the rest of the Askr icon surface.
+Pass a `title` for meaningful branding and omit it when the mark is purely
+decorative. The logos inherit the same sizing and accessibility behavior as the
+rest of the Askr icon surface.
 
-Apple and GitHub follow the surrounding text color via `currentColor`. Facebook, Google, and Microsoft keep their brand colors so the marks stay recognizable.
+Apple and GitHub follow the surrounding text color via `currentColor`.
+Facebook, Google, and Microsoft keep their brand colors so the marks stay
+recognizable.
