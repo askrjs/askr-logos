@@ -9,7 +9,7 @@ describe("FacebookLogo", () => {
     unmount(container);
   });
 
-  it("renders the facebook logo contract", () => {
+  it("should render the facebook logo contract", () => {
     container = mount(<FacebookLogo />);
     const svg = container.querySelector("svg")!;
 

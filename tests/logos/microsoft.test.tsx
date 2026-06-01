@@ -9,7 +9,7 @@ describe("MicrosoftLogo", () => {
     unmount(container);
   });
 
-  it("renders the microsoft logo contract", () => {
+  it("should render the microsoft logo contract", () => {
     container = mount(<MicrosoftLogo />);
     const svg = container.querySelector("svg")!;
 

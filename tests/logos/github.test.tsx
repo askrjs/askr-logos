@@ -9,7 +9,7 @@ describe("GitHubLogo", () => {
     unmount(container);
   });
 
-  it("renders the github logo contract", () => {
+  it("should render the github logo contract", () => {
     container = mount(<GitHubLogo />);
     const svg = container.querySelector("svg")!;
 

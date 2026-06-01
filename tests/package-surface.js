@@ -10,7 +10,11 @@ for (const exportName of [
   "GoogleLogo",
   "MicrosoftLogo",
 ]) {
-  assert.equal(typeof rootModule[exportName], "function", `${exportName} should be exported from @askrjs/logos`);
+  assert.equal(
+    typeof rootModule[exportName],
+    "function",
+    `${exportName} should be exported from @askrjs/logos`,
+  );
 }
 
 for (const [exportName, specifier] of [

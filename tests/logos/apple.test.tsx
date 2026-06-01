@@ -9,7 +9,7 @@ describe("AppleLogo", () => {
     unmount(container);
   });
 
-  it("renders the apple logo contract", () => {
+  it("should render the apple logo contract", () => {
     container = mount(<AppleLogo />);
     const svg = container.querySelector("svg")!;
 

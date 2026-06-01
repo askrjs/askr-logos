@@ -52,13 +52,14 @@
     "fmt": "vp fmt .",
     "lint": "vp lint .",
     "prepublishOnly": "npm run build",
-    "test": "npm run test:unit",
-    "test:exports": "node tests/package-surface.mjs",
-    "test:types": "tsc -p tsconfig.build.json --noEmit",
+    "test": "npm run test:unit && npm run test:checks && npm run test:exports",
+    "test:checks": "vp test run -c vitest.test.checks.config.ts",
+    "test:exports": "node tests/package-surface.js",
+    "test:types": "tsc -p tsconfig.pack.json --noEmit",
     "test:unit": "vp test run -c vitest.config.ts"
   },
   "devDependencies": {
-    "@askrjs/askr": "^0.0.37",
+    "@askrjs/askr": "^0.0.40",
     "jsdom": "^29.1.1",
     "typescript": "^6.0.3",
     "vite-plus": "^0.1.22"
