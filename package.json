@@ -62,7 +62,7 @@
     "@askrjs/askr": "^0.0.40",
     "jsdom": "^29.1.1",
     "typescript": "^6.0.3",
-    "vite-plus": "^0.1.22"
+    "vite-plus": "^0.1.24"
   },
   "peerDependencies": {
     "@askrjs/askr": ">=0.0.30 <0.1.0"
