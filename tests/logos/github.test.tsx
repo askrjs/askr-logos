@@ -16,5 +16,7 @@ describe("GitHubLogo", () => {
     expect(svg.getAttribute("data-slot")).toBe("icon");
     expect(svg.getAttribute("data-icon")).toBe("GitHubLogo");
     expect(svg.getAttribute("aria-hidden")).toBe("true");
+    expect(svg.querySelectorAll("path").length).toBe(1);
+    expect(svg.querySelector("path")!.getAttribute("fill")).toBe("currentColor");
   });
 });

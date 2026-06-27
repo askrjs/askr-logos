@@ -15,6 +15,9 @@ describe("GoogleLogo", () => {
 
     expect(svg.getAttribute("data-slot")).toBe("icon");
     expect(svg.getAttribute("data-icon")).toBe("GoogleLogo");
-    expect(svg.querySelectorAll("circle").length).toBe(4);
+    expect(svg.querySelectorAll("path").length).toBe(4);
+    expect(
+      Array.from(svg.querySelectorAll("path")).map((path) => path.getAttribute("fill")),
+    ).toEqual(["#4285F4", "#34A853", "#FBBC05", "#EA4335"]);
   });
 });

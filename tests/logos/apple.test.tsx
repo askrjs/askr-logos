@@ -15,6 +15,10 @@ describe("AppleLogo", () => {
 
     expect(svg.getAttribute("data-slot")).toBe("icon");
     expect(svg.getAttribute("data-icon")).toBe("AppleLogo");
-    expect(svg.querySelectorAll("path").length).toBeGreaterThanOrEqual(2);
+    expect(svg.querySelectorAll("path").length).toBe(1);
+    expect(svg.querySelector("path")!.getAttribute("fill")).toBe("currentColor");
+    expect(svg.querySelector("path")!.getAttribute("d")).toContain(
+      "c-.948 0-2.415-1.078-3.96-1.04",
+    );
   });
 });
