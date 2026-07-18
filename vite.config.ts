@@ -19,7 +19,7 @@ export default defineConfig({
     format: ["esm"],
     outDir: "dist",
     platform: "neutral",
-    sourcemap: true,
+    sourcemap: "hidden",
     unbundle: true,
   },
   esbuild: {
