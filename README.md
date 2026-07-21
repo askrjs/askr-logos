@@ -1,5 +1,8 @@
 # @askrjs/logos
 
+[![CI](https://github.com/askrjs/askr-logos/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/askrjs/askr-logos/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/%40askrjs%2Flogos.svg)](https://www.npmjs.com/package/@askrjs/logos)
+
 Thin Askr wrappers for a small set of brand logos.
 
 `@askrjs/logos` keeps brand marks aligned with the shared Askr icon contract.
