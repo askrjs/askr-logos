@@ -1,5 +1,5 @@
 export { createLogo } from "./create-logo";
-export type { LogoNode, LogoProps } from "./types";
+export type { LogoAttribute, LogoAttributes, LogoNode, LogoProps, LogoTag } from "./types";
 
 export { FacebookLogo } from "./logos/facebook";
 export { GitHubLogo } from "./logos/github";
