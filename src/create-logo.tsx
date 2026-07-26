@@ -55,6 +55,9 @@ function safeLogoNode(logoNode: LogoNode): LogoNode {
       }
       const safeAttrs: Record<string, string> = {};
       for (const [name, value] of Object.entries(attrs)) {
+        if (typeof value !== "string") {
+          throw new TypeError(`Logo SVG attribute ${name} must be a string.`);
+        }
         if (!SAFE_ATTRIBUTES.has(name as LogoAttribute)) {
           throw new TypeError(`Unsupported logo SVG attribute: ${name}`);
         }

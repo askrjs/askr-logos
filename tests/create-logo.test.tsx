@@ -14,9 +14,10 @@ describe("createLogo", () => {
     [["path", { onload: "alert(1)" }]],
     [["path", { href: "javascript:alert(1)" }]],
     [["path", { fill: "url(https://attacker.test/image.svg#paint)" }]],
+    [["rect", { width: 24 }]],
   ])("should reject executable SVG node definitions", (node) => {
     expect(() => createLogo("HostileLogo", node as unknown as LogoNode)).toThrow(
-      /Unsupported logo SVG|URL reference/,
+      /Unsupported logo SVG|URL reference|must be a string/,
     );
   });
 
