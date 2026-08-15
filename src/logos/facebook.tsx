@@ -1,5 +1,6 @@
 import { createLogo } from "../create-logo";
 
+/** Facebook logo icon component. */
 export const FacebookLogo = createLogo("FacebookLogo", [
   [
     "path",

@@ -1,5 +1,6 @@
 import { createLogo } from "../create-logo";
 
+/** GitHub logo icon component. */
 export const GitHubLogo = createLogo("GitHubLogo", [
   [
     "path",

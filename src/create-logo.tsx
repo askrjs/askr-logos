@@ -71,6 +71,22 @@ function safeLogoNode(logoNode: LogoNode): LogoNode {
   );
 }
 
+/**
+ * Builds a brand logo icon component from a set of SVG shape descriptors.
+ *
+ * Validates the given `logoNode` against an allow-list of safe SVG tags and
+ * attributes (rejecting any `url(...)` references in `fill`/`stroke`), then
+ * returns a component that renders those shapes wrapped in `IconBase`,
+ * matching the sizing/color conventions of other Askr icons.
+ *
+ * @param displayName - Name used for the icon (`iconName`) and set as the
+ *   returned component's `displayName`.
+ * @param logoNode - Read-only list of `[tag, attributes]` pairs describing
+ *   the logo's SVG shapes.
+ * @returns A component accepting {@link LogoProps} that renders the logo.
+ * @throws {TypeError} If `logoNode` contains an unsupported tag/attribute,
+ *   a non-string attribute value, or a `url(...)` reference in `fill`/`stroke`.
+ */
 export function createLogo(displayName: string, logoNode: LogoNode) {
   const safeNode = safeLogoNode(logoNode);
   function Logo(props: LogoProps) {
