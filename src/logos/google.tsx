@@ -1,5 +1,6 @@
 import { createLogo } from "../create-logo";
 
+/** Google logo icon component. */
 export const GoogleLogo = createLogo("GoogleLogo", [
   [
     "path",

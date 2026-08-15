@@ -1,5 +1,6 @@
 import { createLogo } from "../create-logo";
 
+/** Apple logo icon component. */
 export const AppleLogo = createLogo("AppleLogo", [
   [
     "path",
