@@ -47,22 +47,32 @@ const SAFE_ATTRIBUTES = new Set<LogoAttribute>([
   "y2",
 ]);
 
-function safeLogoNode(logoNode: LogoNode): LogoNode {
+function safeLogoNode(displayName: string, logoNode: LogoNode): LogoNode {
+  if (!Array.isArray(logoNode)) {
+    throw new TypeError(`${displayName}: logo definition must be an array.`);
+  }
   return Object.freeze(
-    logoNode.map(([tag, attrs]) => {
+    logoNode.map((entry) => {
+      if (!Array.isArray(entry) || entry.length !== 2) {
+        throw new TypeError(`${displayName}: logo definition contains a malformed SVG entry.`);
+      }
+      const [tag, attrs] = entry;
       if (!SAFE_TAGS.has(tag)) {
-        throw new TypeError(`Unsupported logo SVG tag: ${tag}`);
+        throw new TypeError(`${displayName}: unsupported logo SVG tag: ${tag}`);
+      }
+      if (!attrs || typeof attrs !== "object" || Array.isArray(attrs)) {
+        throw new TypeError(`${displayName}: logo SVG attributes must be an object.`);
       }
       const safeAttrs: Record<string, string> = {};
       for (const [name, value] of Object.entries(attrs)) {
         if (typeof value !== "string") {
-          throw new TypeError(`Logo SVG attribute ${name} must be a string.`);
+          throw new TypeError(`${displayName}: logo SVG attribute ${name} must be a string.`);
         }
         if (!SAFE_ATTRIBUTES.has(name as LogoAttribute)) {
-          throw new TypeError(`Unsupported logo SVG attribute: ${name}`);
+          throw new TypeError(`${displayName}: unsupported logo SVG attribute: ${name}`);
         }
         if ((name === "fill" || name === "stroke") && /\burl\s*\(/i.test(value)) {
-          throw new TypeError(`Logo SVG ${name} cannot contain a URL reference.`);
+          throw new TypeError(`${displayName}: logo SVG ${name} cannot contain a URL reference.`);
         }
         safeAttrs[name] = value;
       }
@@ -88,7 +98,7 @@ function safeLogoNode(logoNode: LogoNode): LogoNode {
  *   a non-string attribute value, or a `url(...)` reference in `fill`/`stroke`.
  */
 export function createLogo(displayName: string, logoNode: LogoNode) {
-  const safeNode = safeLogoNode(logoNode);
+  const safeNode = safeLogoNode(displayName, logoNode);
   function Logo(props: LogoProps) {
     const children = createSvgFragment(Fragment, {
       children: safeNode.map(([tag, attrs], index) =>
