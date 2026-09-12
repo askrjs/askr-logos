@@ -2,3 +2,6 @@ node_modules
 dist
 coverage
 .DS_Store
+
+# Local agent state and worktrees
+.claude/
