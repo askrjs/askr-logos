@@ -35,10 +35,6 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./logos/*": {
-      "types": "./dist/logos/*.d.ts",
-      "import": "./dist/logos/*.js"
-    },
     "./package.json": "./package.json"
   },
   "publishConfig": {
