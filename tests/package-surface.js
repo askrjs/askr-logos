@@ -8,10 +8,12 @@ import { build } from "vite-plus";
 const names = ["AppleLogo", "FacebookLogo", "GitHubLogo", "GoogleLogo", "MicrosoftLogo"];
 const manifest = JSON.parse(readFileSync("package.json", "utf8"));
 assert.deepEqual(Object.keys(manifest.exports).sort(), [".", "./package.json"]);
-const npm = process.platform === "win32" ? "npm.cmd" : "npm";
+const npmCli = process.env.npm_execpath;
+assert.ok(npmCli, "Run the packed consumer through npm run test:exports");
+const runNpm = (args, options) => execFileSync(process.execPath, [npmCli, ...args], options);
 const root = mkdtempSync(join(tmpdir(), "askr-logos-packed-"));
 try {
-  execFileSync(npm, ["pack", "--ignore-scripts", "--pack-destination", root], { stdio: "pipe" });
+  runNpm(["pack", "--ignore-scripts", "--pack-destination", root], { stdio: "pipe" });
   const archives = readdirSync(root).filter((file) => file.endsWith(".tgz"));
   assert.equal(archives.length, 1);
   const consumer = join(root, "consumer");
@@ -27,7 +29,7 @@ try {
       dependencies: { "@askrjs/logos": `file:${join(root, archives[0])}`, "@askrjs/askr": floor },
     }),
   );
-  execFileSync(npm, ["install", "--ignore-scripts", "--no-audit", "--no-fund"], {
+  runNpm(["install", "--ignore-scripts", "--no-audit", "--no-fund"], {
     cwd: consumer,
     stdio: "pipe",
   });
@@ -83,9 +85,11 @@ import { GitHubLogo as DeepLogo } from "@askrjs/logos/logos/github";
       files: ["types.ts"],
     }),
   );
-  execFileSync(resolve("node_modules/.bin/tsc"), ["-p", join(consumer, "tsconfig.json")], {
-    stdio: "inherit",
-  });
+  execFileSync(
+    process.execPath,
+    [resolve("node_modules/typescript/bin/tsc"), "-p", join(consumer, "tsconfig.json")],
+    { stdio: "inherit" },
+  );
   writeFileSync(join(consumer, "entry.js"), 'export { GitHubLogo } from "@askrjs/logos";');
   const result = await build({
     root: consumer,
