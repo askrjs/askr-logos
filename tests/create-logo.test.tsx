@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it } from "vite-plus/test";
-import { createLogo, type LogoNode } from "../src";
+import { createLogo } from "../src/create-logo";
+import type { LogoNode } from "../src/types";
 import { mount, unmount } from "./logos/test-utils";
 
 describe("createLogo", () => {
@@ -13,7 +14,11 @@ describe("createLogo", () => {
     { node: [["script", {}]] },
     { node: [["path", { onload: "alert(1)" }]] },
     { node: [["path", { href: "javascript:alert(1)" }]] },
+    { node: [["path", { "xlink:href": "#paint" }]] },
+    { node: [["path", { OnLoad: "alert(1)" }]] },
+    { node: [["path", { "fill-rule": "evenodd" }]] },
     { node: [["path", { fill: "url(https://attacker.test/image.svg#paint)" }]] },
+    { node: [["path", { stroke: " URL ( #paint )" }]] },
     { node: [["rect", { width: 24 }]] },
   ])("should reject executable SVG node definitions", ({ node }) => {
     expect(() => createLogo("HostileLogo", node as unknown as LogoNode)).toThrow(
@@ -93,5 +98,26 @@ describe("createLogo", () => {
     expect(logos[0].querySelector("title")?.textContent).toBe("Brand 0");
     expect(logos[99].querySelector("title")?.textContent).toBe("Brand 99");
     expect(new Set(logos.map((logo) => logo.querySelector("circle"))).size).toBe(100);
+  });
+
+  it("should preserve the SVG namespace and canonical shape attribute casing", () => {
+    const ShapeLogo = createLogo("ShapeLogo", [
+      [
+        "path",
+        {
+          d: "M0 0h24v24H0z",
+          fillRule: "evenodd",
+          clipRule: "evenodd",
+          strokeWidth: "2",
+        },
+      ],
+    ]);
+    container = mount(<ShapeLogo />);
+    const path = container.querySelector("path")!;
+    expect(path.namespaceURI).toBe("http://www.w3.org/2000/svg");
+    expect(path.getAttribute("fill-rule")).toBe("evenodd");
+    expect(path.getAttribute("clip-rule")).toBe("evenodd");
+    expect(path.getAttribute("stroke-width")).toBe("2");
+    expect(path.hasAttribute("fillRule")).toBe(false);
   });
 });

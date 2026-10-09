@@ -8,14 +8,7 @@ export default defineConfig({
     deps: {
       neverBundle: [externalPackagePattern],
     },
-    entry: [
-      "src/index.ts",
-      "src/logos/apple.tsx",
-      "src/logos/facebook.tsx",
-      "src/logos/github.tsx",
-      "src/logos/google.tsx",
-      "src/logos/microsoft.tsx",
-    ],
+    entry: ["src/index.ts"],
     format: ["esm"],
     outDir: "dist",
     platform: "neutral",
