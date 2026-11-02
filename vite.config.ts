@@ -5,9 +5,7 @@ const externalPackagePattern = /^@askrjs\/askr(?:\/.*)?$/;
 export default defineConfig({
   pack: {
     dts: true,
-    deps: {
-      neverBundle: [externalPackagePattern],
-    },
+    deps: { resolveDepSubpath: true, neverBundle: [externalPackagePattern] },
     entry: ["src/index.ts"],
     format: ["esm"],
     outDir: "dist",
