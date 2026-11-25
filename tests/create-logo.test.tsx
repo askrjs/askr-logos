@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it } from "vite-plus/test";
+import { renderToStringSync } from "@askrjs/askr/ssr";
 import { createLogo } from "../src/create-logo";
 import type { LogoNode } from "../src/types";
 import { mount, unmount } from "./logos/test-utils";
@@ -98,6 +99,21 @@ describe("createLogo", () => {
     expect(logos[0].querySelector("title")?.textContent).toBe("Brand 0");
     expect(logos[99].querySelector("title")?.textContent).toBe("Brand 99");
     expect(new Set(logos.map((logo) => logo.querySelector("circle"))).size).toBe(100);
+  });
+
+  it.each([
+    ["ellipse", { cx: "12", cy: "12", rx: "8", ry: "5" }, "rx", "8"],
+    ["line", { x1: "2", y1: "3", x2: "20", y2: "21" }, "x2", "20"],
+    ["polyline", { points: "2,3 12,13 22,3" }, "points", "2,3 12,13 22,3"],
+  ] as const)("should render %s geometry in the logo namespace", (tag, attrs, attr, value) => {
+    const ShapeLogo = createLogo("ShapeLogo", [[tag, attrs]] as LogoNode);
+    const html = renderToStringSync(() => <ShapeLogo />);
+    expect(html).toContain(`<${tag}`);
+    expect(html).toContain(`${attr}="${value}"`);
+    container = mount(<ShapeLogo />);
+    const shape = container.querySelector(tag)!;
+    expect(shape.namespaceURI).toBe("http://www.w3.org/2000/svg");
+    expect(shape.getAttribute(attr)).toBe(value);
   });
 
   it("should preserve the SVG namespace and canonical shape attribute casing", () => {
