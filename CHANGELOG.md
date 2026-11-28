@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-11-28
+
+### Tests
+
+- Verify the SVG geometry emitted by rendered logos.
+
 ## [0.5.0] - 2026-10-10
 
 ### Removed

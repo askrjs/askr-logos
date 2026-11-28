@@ -1,6 +1,6 @@
 {
   "name": "@askrjs/logos",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Thin Askr wrappers for the Askr logo SVG set",
   "keywords": [
     "askr",
